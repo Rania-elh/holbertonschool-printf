@@ -1,62 +1,75 @@
+#include <stdio.h>
 #include <stdarg.h>
-#include <unistd.h>
+#include "main.h"
 
 /**
- * _printf - Simplified implementation of printf.
- * @format: The format string containing the specifiers.
- *
- * Return: The number of characters printed.
+ * _printf - main function which prints each char in format
+ * and each variadic argument of type char "c", string "s"
+ * percent "%", decimal integer "d" or "i" and returns
+ * total number of char printed (count)
+ * any other type as specifier is considered non-valid types
+ * and are simply printed as normal char in the standard output
+ * @format: character string composed of zero or more directives
+ * is the string to be printed in standard output
+ * Remark1: Datatype struct defined in header and contains
+ * char *specifier which is 1st letter of each type followed by
+ * function pointer (*print_type) pointing to function
+ * which prints arguments of associated type and returns
+ * number of char printed to count value
+ * Remark2: printfall is va_list containting
+ * all the variadic arguments to print
+ * Remark3: taking printfall as parameter of
+ * datatype[j].print_type permits to not call va_arg macro
+ * at that moment with unknown/variable type as 2nd parameter
+ * Remark4: if datatype[j].specifier reaches NULL, it means
+ * it has not found any valid specifier but has found a
+ * non-valid one, so they are printed and counts increases
+ * by 2 char (% and letter of non_valid specifier (ex: %u))
+ * Return: returns int count which is the total number of
+ * char printed by _printf in the standard output
  */
+
+
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int count = 0; /* Counter for printed characters */
-	int i, j; /* Declare i and j variables before the loops */
+	Datatype datatype[] = {
+		{"c", print_char}, {"s", print_string}, {"%", print_percent},
+		{"d", print_decimal}, {"i", print_decimal}, {NULL, NULL}
+	};
+	va_list printfall;
+	int i, j, count;
 
-	/* Initialize the arguments list */
-	va_start(args, format);
+	count = 0, i = 0;
+	va_start(printfall, format);
 
-	/* Loop through the format string */
-	for (i = 0; format[i] != '\0'; i++) {
-		if (format[i] == '%') {
-			/* If '%' is found, check the next character */
-			i++; /* Move to the next character */
-			if (format[i] == 'c') {
-				/* Specifier for a character */
-				char c = va_arg(args, int); /* Retrieve the character */
-				write(1, &c, 1); /* Print the character */
-				count++; /* Increment the counter */
-			}
-			else if (format[i] == 's') {
-				/* Specifier for a string */
-				char *str = va_arg(args, char*);
-				/* If the string is NULL, print "(null)" */
-				if (str == NULL) {
-					str = "(null)";
-				}
-				/* Print the string character by character */
-				for (j = 0; str[j] != '\0'; j++) {
-					write(1, &str[j], 1);
-					count++; /* Count the characters */
-				}
-			}
-			else if (format[i] == '%') {
-				/* If '%%' is found, print a literal '%' */
-				write(1, "%", 1);
-				count++; /* Count the '%' character */
-			}
-		}
-		else {
-			/* If it's not a '%', print the character as is */
-			write(1, &format[i], 1);
-			count++; /* Count the characters */
-		}
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	{	va_end(printfall);
+		return (-1);
 	}
-
-	/* Clean up the arguments list */
-	va_end(args);
-
-	/* Return the number of characters printed */
+	while (format != NULL && format[i] != '\0')
+	{
+		if (format[i] != '%')
+		{
+			_putchar(format[i]);
+			count++;
+		} else
+		{	i++, j = 0;
+			while (datatype[j].specifier != NULL)
+			{
+				if (format[i] == *datatype[j].specifier)
+				{
+					count += datatype[j].print_type(printfall);
+					break;
+				} j++;
+			}
+			if (datatype[j].specifier == NULL)
+			{
+				_putchar('%');
+				_putchar(format[i]);
+				count += 2;
+				va_arg(printfall, int *);
+			}
+		} i++;
+	} va_end(printfall);
 	return (count);
 }
-
