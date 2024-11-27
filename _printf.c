@@ -1,59 +1,56 @@
-#include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
 /**
- * _printf - A simplified version of printf
- * @format: The format string containing the specifiers
+ * _printf - Implémentation simplifiée de printf.
+ * @format: La chaîne de format contenant les spécificateurs.
  *
- * Return: The number of characters printed (excluding the null byte)
+ * Return: Le nombre de caractères imprimés.
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;           // Counter to track the number of characters printed
-	va_list args;            // Variable argument list
-	va_start(args, format);  // Initialize the va_list
-	while (*format)         // Loop through the format string
-	{
-		if (*format == '%')  // Check for a format specifier
-		{
-			format++;  // Skip the '%' character
-			if (*format == 'c')  // Handle the character specifier
-			{
-				char c = (char)va_arg(args, int);  // Get the argument of type char
-				write(1, &c, 1);  // Print the character
-				count++;
+	va_list args;
+	int count = 0; /* Compteur des caractères imprimés */
+	int i, j; /* Déclarer les variables i et j avant les boucles */
+	/* Initialiser la liste d'arguments */
+	va_start(args, format);
+	/* Parcourir la chaîne de format */
+	for (i = 0; format[i] != '\0'; i++) {
+		if (format[i] == '%') {
+			/* Si on trouve un '%', on regarde ce qui suit */
+			i++; /* Passer au caractère suivant */
+			if (format[i] == 'c') {
+				/* Spécificateur pour un caractère */
+				char c = va_arg(args, int); /* Récupérer le caractère */
+				write(1, &c, 1); /* Imprimer le caractère */
+				count++; /* Augmenter le compteur */
 			}
-			else if (*format == 's')  // Handle the string specifier
-			{
-				char *str = va_arg(args, char*);  // Get the argument of type string
-				if (str == NULL)  // If the string is NULL, print "(null)"
-				{
+			else if (format[i] == 's') {
+				/* Spécificateur pour une chaîne de caractères */
+				char *str = va_arg(args, char*);
+				/* Si la chaîne est NULL, afficher "(null)" */
+				if (str == NULL) {
 					str = "(null)";
 				}
-				while (*str)  // Print each character of the string
-				{
-					write(1, str, 1);
-					str++;
-					count++;
+				/* Imprimer la chaîne caractère par caractère */
+				for (j = 0; str[j] != '\0'; j++) {
+					write(1, &str[j], 1);
+					count++; /* Compter les caractères */
 				}
 			}
-			else if (*format == '%')  // Handle the literal percentage "%%"
-			{
+			else if (format[i] == '%') {
+				/* Si on trouve '%%', afficher un '%' littéral */
 				write(1, "%", 1);
-				count++;
-			}
-			else  // If an unsupported specifier is found, print the '%' followed by the specifier
-			{
-				write(1, "%", 1);
-				write(1, format, 1);
-				count += 2;  // Account for the '%' and the specifier character
+				count++; /* Compter le caractère '%' */
 			}
 		}
-		else  // If it's not a format specifier, just print the character as is
-		{
-			write(1, format, 1);
-			count++;
+		else {
+			/* Si ce n'est pas un '%', on imprime le caractère tel quel */
+			write(1, &format[i], 1);
+			count++; /* Compter les caractères */
 		}
-		format++;  // Move to the next character in the format string
 	}
-	va_end(args);  // Clean up the va_list
-	return count;  // Return the total number of characters printed
+	/* Nettoyer la liste d'arguments */
+	va_end(args);
+	/* Retourner le nombre de caractères imprimés */
+	return (count);
 }
