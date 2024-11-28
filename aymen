@@ -1,7 +1,9 @@
 #include <stdarg.h>
 //Inclusion de la bibliothèque pour gérer les arguments variadiques.//
+
 #include <unistd.h> 
 // Inclusion pour utiliser la fonction write.//
+
 
 /**
  * _printf - Implémentation simplifiée de printf.
@@ -13,38 +15,94 @@
 int _printf(const char *format, ...) 
 // Définition de la fonction _printf avec des arguments variadiques.
 {
-	va_list args; // Déclare une variable pour gérer les arguments variadiques.
-	int count = 0; // Initialise le compteur de caractères imprimés.
-	int i, j; // Déclare des variables pour parcourir les chaînes.
-	va_start(args, format); // Initialise la liste des arguments variadiques en indiquant le dernier paramètre fixe.
-	for (i = 0; format[i] != '\0'; i++) { // Parcourt chaque caractère de la chaîne de format.
-		if (format[i] == '%') { // Vérifie si le caractère est un '%'.
-			i++; // Passe au caractère suivant (spécificateur).
-			if (format[i] == 'c') { // Vérifie si le spécificateur est 'c' (caractère).
-				char c = va_arg(args, int); // Récupère le prochain argument en tant qu'entier (ASCII).
-				write(1, &c, 1); // Affiche le caractère.
-				count++; // Incrémente le compteur.
+	va_list args; 
+// Déclare une variable pour gérer les arguments variadiques.
+
+	int count = 0;
+// Initialise le compteur de caractères imprimés.
+
+	int i, j;
+// Déclare des variables pour parcourir les chaînes.
+
+	va_start(args, format); 
+// Initialise la liste des arguments variadiques en indiquant le dernier paramètre fixe.
+
+	for (i = 0; format[i] != '\0'; i++) 
+{ 
+// Parcourt chaque caractère de la chaîne de format.
+
+		if (format[i] == '%')
+{
+// Vérifie si le caractère est un '%'.
+
+			i++; 
+// Passe au caractère suivant (spécificateur).
+
+			if (format[i] == 'c') {
+// Vérifie si le spécificateur est 'c' (caractère).
+
+				char c = va_arg(args, int);
+// Récupère le prochain argument en tant qu'entier (ASCII).
+			
+				write(1, &c, 1); 
+// Affiche le caractère.
+
+				count++; 
+// Incrémente le compteur.
 			}
-			else if (format[i] == 's') { // Vérifie si le spécificateur est 's' (chaîne de caractères).
-				char *str = va_arg(args, char*); // Récupère l'argument en tant que chaîne.
-				if (str == NULL) { // Si la chaîne est NULL, affiche "(null)".
+
+			else if (format[i] == 's') {
+// Vérifie si le spécificateur est 's' (chaîne de caractères).
+
+				char *str = va_arg(args, char*);
+// Récupère l'argument en tant que chaîne.
+
+	
+
+				if (str == NULL) { 
+// Si la chaîne est NULL, affiche "(null)".
+
 					str = "(null)";
 				}
-				for (j = 0; str[j] != '\0'; j++) { // Parcourt chaque caractère de la chaîne.
-					write(1, &str[j], 1); // Affiche le caractère courant.
-					count++; // Incrémente le compteur.
+				for (j = 0; str[j] != '\0'; j++) {
+// Parcourt chaque caractère de la chaîne.
+
+					write(1, &str[j], 1);
+// Affiche le caractère courant.
+					count++; 
+// Incrémente le compteur.
 				}
 			}
-			else if (format[i] == '%') { // Si le spécificateur est '%%', affiche un '%'.
-				write(1, "%", 1); // Affiche le caractère '%'.
-				count++; // Incrémente le compteur.
+			else if (format[i] == '%') {
+ 
+// Si le spécificateur est '%%', affiche un '%'.
+				
+				write(1, "%", 1); 
+// Affiche le caractère '%'.
+
+				count++; 
+// Incrémente le compteur.
 			}
+
 		}
-		else { // Si ce n'est pas un '%', affiche le caractère tel quel.
-			write(1, &format[i], 1); // Affiche le caractère courant.
-			count++; // Incrémente le compteur.
+
+		else { 
+
+// Si ce n'est pas un '%', affiche le caractère tel quel.
+
+			write(1, &format[i], 1);
+// Affiche le caractère courant.
+
+			count++; 
+// Incrémente le compteur.
+
 		}
+
 	}
-	va_end(args); // Termine l'utilisation des arguments variadiques.
-	return (count); // Retourne le nombre total de caractères imprimés.
+
+	va_end(args);
+// Termine l'utilisation des arguments variadiques.
+
+	return (count);
+// Retourne le nombre total de caractères imprimés.
 }
