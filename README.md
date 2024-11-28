@@ -23,7 +23,8 @@ int main() {
    return 0;
 }
 ```
-stdout 'A'
+Outpout :
+A
 
 ### String : 
 ```
@@ -41,7 +42,8 @@ int main() {
    return 0;
 }
 ```
-stdout "Hello world"
+Output :
+Hello world
 
 ### Decimal : 
 ```
@@ -59,7 +61,8 @@ int main() {
    return 0;
 }
 ```
-stdout 46
+Output : 
+46
 
 ## Man Page
 ```
