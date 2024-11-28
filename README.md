@@ -1,3 +1,6 @@
+![image](https://github.com/user-attachments/assets/0dcd69da-1e4a-44ad-80c9-7076e68f92ea)
+
+
 # Project Printf
 
 This project is about making a basic version of the printf function in C. It lets you show text and formatted data on the screen.
