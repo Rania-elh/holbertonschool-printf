@@ -3,62 +3,38 @@
 #include <unistd.h>
 
 /**
- *_printf -  produces output according to a format
+ *_printf - produces output according to a format
  *@format: pointer chiaracter string
- *Returns: the number of characters printed
+ *Return: the number of characters printed
  */
-
 
 int _printf(const char *format, ...)
 {
-	int count=0;
-	const char *ptr;
+	int count = 0;
 	va_list args;
-	va_start(args,format);
 
-	
-	for(ptr=format;*ptr!='\0';ptr++)
+	va_start(args, format);
+
+	for (const char *ptr = format; *ptr != '\0'; ptr++)
 	{
-
-		if(*ptr!='%')
-		{
-			_putchar(*ptr);
-			count++;
-
-		}
-		
-		else
+		if (*ptr == '%')
 		{
 			ptr++;
-
-			if(*ptr=='c')	
-			{
-				char c=va_arg(args,int);
-
-				_putchar(c);
-				count++;
-			}
-			
-			else if(*ptr=='s')
-			{
-				char *s=va_arg(args,char*);
-				int i;
-
-				for(i=0;s[i]!='\0';i++)
-				{
-				_putchar(s[i]);
-				count++;
-				}
-			
-			}
-			
-			else if(*ptr=='%')
-			{
-				_putchar('%');
-				count++;
-			}
-		}	
+			if (*ptr == 'c')
+				count += _putchar(va_arg(args, int));
+			else if (*ptr == 's')
+				for (char *str = va_arg(args, char *); *str; str++, count++)
+					count += _putchar(*str);
+			else if (*ptr == '%')
+				count += _putchar('%');
+			else
+				count += _putchar('%') + _putchar(*ptr);
+		}
+		else
+			count += _putchar(*ptr);
 	}
+
 	va_end(args);
-	return count;
+	return (count);
 }
+
