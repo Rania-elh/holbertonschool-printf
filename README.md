@@ -24,7 +24,7 @@ int main() {
    return 0;
 }
 ```
-Outpout :
+#### Outpout :
 
 A
 
@@ -44,7 +44,7 @@ int main() {
    return 0;
 }
 ```
-Output :
+#### Output :
 
 Hello world
 
@@ -64,7 +64,7 @@ int main() {
    return 0;
 }
 ```
-Output : 
+#### Output : 
 
 46
 
