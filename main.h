@@ -22,12 +22,12 @@ typedef struct toprint
 
 /* -------all functions used-------- */
 
-int _printf_char(va_list args);
+int print_c(va_list args);
 int _printf(const char *format, ...);
-int _printf_string(va_list args);
-int _print_integer(va_list args);
-int _print_decimal(va_list args);
-int _printf_modulo(__attribute__((unused)) va_list args);
+int print_s(va_list args);
+int print_int(va_list args);
+int print_deci(va_list args);
+int print_purcent(__attribute__((unused)) va_list args);
 int _putchar(char);
 int selection(va_list args, char specifiers);
 int print_id(int n);
