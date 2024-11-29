@@ -7,7 +7,7 @@
  * Return: to function id
  */
 
-int print_int(va_list args)
+int _print_int(va_list args)
 {
 int count = 0;
 int n = va_arg(args, int);

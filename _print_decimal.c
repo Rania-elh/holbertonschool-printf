@@ -4,7 +4,7 @@
 
 /**
  * _print_decimal - Print a decimal number.
- *@agrs: int
+ *@args: int
  *Return: The number of characters printed.
  */
 
