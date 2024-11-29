@@ -2,6 +2,13 @@
 # Project Printf
 
 This project is about making a basic version of the printf function in C. It lets you show text and formatted data on the screen.
+#### va_list : 
+It is used to declare variable that can be used to access the arguments of a variadic function.
+#### va_start : 
+Initialise the argument list (ap).
+#### va_end : 
+Frees the resources used by va_list.
+
 ---
 
 ## 1. Clarity of the project
@@ -67,6 +74,15 @@ int main() {
 #### Output : 
 
 46
+
+## File Structure
+
+### main.h
+Header file containing function prototypes.
+### main.c
+It is used to test the _printf function.
+### _putchar.c
+The file is used to print a character to the standard output(stdout) using the "write" function.
 
 ## Man Page
 ```
