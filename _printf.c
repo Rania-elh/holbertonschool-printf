@@ -1,50 +1,52 @@
 #include "main.h"
 #include <stdarg.h>
-#include <unistd.h>
-
+#include <stddef.h>
 /**
- * _printf - produces output according to a format
- * @format: format types
- * Return: count
+ * _printf - Produces formatted output.
+ * @format: Format string containing the text and format specifiers.
+ *
+ * Return: Total number of characters printed.
  */
 int _printf(const char *format, ...)
 {
-	int i;
-	int count = 0;
+	int i = 0, len = 0;
+	int j;
 	va_list args;
 
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
 	va_start(args, format);
 
-	for (i = 0; format[i] != '\0'; i++)
+	while (format && format[i])
 	{
-		if (format[i] != '%')
-		{
-			_putchar(format[i]);
-			count++;
-		}
-		else
+		if (format[i] == '%' && format[i + 1])
 		{
 			i++;
 			if (format[i] == 'c')
-			{
-				count += _printf_char(args);
-			}
+				len += _putchar(va_arg(args, int));
 			else if (format[i] == 's')
 			{
-				count += _printf_string(args);
+				char *str = va_arg(args, char *);
+
+				if (!str)
+					str = "(null)";
+				for (j = 0; str[j]; j++, len++)
+					_putchar(str[j]);
 			}
 			else if (format[i] == '%')
-			{
-				count += _printf_modulo(args);
-			}
+				len += _putchar('%');
 			else
 			{
-				_putchar('%');
-				_putchar(format[i]);
-				count += 2;
+				len += _putchar('%');
+				len += _putchar(format[i]);
 			}
 		}
+		else
+		{
+			len += _putchar(format[i]);
+		}
+		i++;
 	}
 	va_end(args);
-	return (count);
+	return (len);
 }

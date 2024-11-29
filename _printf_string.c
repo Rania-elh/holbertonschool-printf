@@ -8,7 +8,7 @@
  * Return: allchar
  */
 
-int printf_string(va_list args)
+int _printf_string(va_list args)
 {
 	int i;
 	int allchar = 0;
