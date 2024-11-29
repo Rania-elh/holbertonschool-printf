@@ -1,52 +1,45 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stddef.h>
+
 /**
- * _printf - Produces formatted output.
- * @format: Format string containing the text and format specifiers.
- *
- * Return: Total number of characters printed.
+ * _printf - produces output with printf command
+ * @format: what we want to print
+ * Return: number of characters printed withput null terminator
  */
+
 int _printf(const char *format, ...)
 {
-	int i = 0, len = 0;
-	int j;
 	va_list args;
+	int i = 0;
+	int length = 0;
+	/*chars to be printed*/
 
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
 	va_start(args, format);
 
-	while (format && format[i])
+	if (format == NULL)
 	{
-		if (format[i] == '%' && format[i + 1])
-		{
-			i++;
-			if (format[i] == 'c')
-				len += _putchar(va_arg(args, int));
-			else if (format[i] == 's')
-			{
-				char *str = va_arg(args, char *);
+		return (-1);
+	}
 
-				if (!str)
-					str = "(null)";
-				for (j = 0; str[j]; j++, len++)
-					_putchar(str[j]);
-			}
-			else if (format[i] == '%')
-				len += _putchar('%');
-			else
-			{
-				len += _putchar('%');
-				len += _putchar(format[i]);
-			}
+	while (format != NULL && format[i] != '\0')
+	{
+		/**
+		 * is it a format specifier ???
+		 */
+		if (format[i] == '%')
+		{
+			if (format[i + 1] == '\0')
+				return (-1);
+
+			length += selection(args, format[i + 1]);
+			i += 2;
 		}
 		else
+
 		{
-			len += _putchar(format[i]);
+			length += _putchar(format[i]);
+			i++;
 		}
-		i++;
 	}
 	va_end(args);
-	return (len);
+	return (length);
 }
