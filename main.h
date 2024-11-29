@@ -1,25 +1,30 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef _MAIN_H_
+#define _MAIN_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdarg.h>
 
 /**
- * struct type - Struct type
- * @specifier: the data type specifier for _printf
- * @print_type: function print associated with the specifier
- * for each data type
-*/
-
-typedef struct type
+ *  Formats de structure - structure qui stocke different types
+ *  que _printf peut imprimer et leur fonction respective
+ *  Define type and args in separate lines
+ *  @type: le type du format (ex: 'c', 's')
+ *  @f: la fonction qui imprimera le type associé
+ */
+typedef struct formats
 {
-	char *specifier;
-	int (*print_type)(va_list printfall);
-} Datatype;
+	char type;
+	int (*f)(va_list args);
+} format_t;
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int print_char(va_list printfall);
-int print_string(va_list printfall);
-int print_percent(va_list printfall);
-int print_decimal(va_list printfall);
+int _printf_char(va_list args);
+int _printf_modulo(va_list args);
+int _printf_string(va_list args);
+int _printf_decimal_recursive(int num);
+int _printf_decimal(va_list args);
 
 #endif
