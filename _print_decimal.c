@@ -3,16 +3,16 @@
 #include "main.h"
 
 /*
- * _print_decimal - print a decimal
+ * _print_decimal - Print a decimal number.
  *@agrs: int
- *Return: 0
+ *Return: The number of characters printed.
  */
 
 int _print_decimal(va_list args)
 {
 int i = va_arg(args, int);
 int count = 0;
-if (i < 0 )
+if (i < 0)
 {
 	_putchar('-');
 	i = -i;
