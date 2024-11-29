@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include "main.h"
 
-/*
+/**
  * _print_decimal - print a decimal
  *@agrs: int
  *Return: 0

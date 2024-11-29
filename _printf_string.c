@@ -3,7 +3,7 @@
 #include <stdarg.h>
 
 /**
- * print_string - Prototypes
+ * _printf_string - Prototypes
  * @args: arguments
  * Return: allchar
  */

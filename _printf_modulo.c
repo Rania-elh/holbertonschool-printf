@@ -3,7 +3,7 @@
 #include "main.h"
 
 /**
- * _print_modulo - print a %
+ * _printf_modulo - print a %
  * @args: arguments
  * Return: 1
  */
