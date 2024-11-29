@@ -25,6 +25,7 @@ int main() {
 }
 ```
 Outpout :
+
 A
 
 ### String : 
@@ -44,6 +45,7 @@ int main() {
 }
 ```
 Output :
+
 Hello world
 
 ### Decimal : 
@@ -63,6 +65,7 @@ int main() {
 }
 ```
 Output : 
+
 46
 
 ## Man Page
