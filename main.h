@@ -1,30 +1,35 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
-
+#ifndef MAIN_HEADER
+#define MAIN_HEADER
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <stdarg.h>
+#include <unistd.h>
 
 /**
- *  Formats de structure - structure qui stocke different types
- *  que _printf peut imprimer et leur fonction respective
- *  Define type and args in separate lines
- *  @type: le type du format (ex: 'c', 's')
- *  @f: la fonction qui imprimera le type associé
+ * struct toprint - type of argument to print/ specifier letter
+ *  and pointer to func
+ * @letter: type of specifier letter (format[i +1]) example d s c
+ * @f: function that is associated with the specifier letter ^^
  */
-typedef struct formats
-{
-	char type;
-	int (*f)(va_list args);
-} format_t;
 
-int _putchar(char c);
-int _printf(const char *format, ...);
+/* -----------little typedef--------- */
+
+typedef struct toprint
+{
+	char *letter;
+	int (*f)(va_list args);
+} toprint_;
+
+/* -------all functions used-------- */
+
 int _printf_char(va_list args);
-int _printf_modulo(va_list args);
+int _printf(const char *format, ...);
 int _printf_string(va_list args);
+int _print_integer(va_list args);
 int _print_decimal(va_list args);
-int _print_int(va_list args);
+int _printf_modulo(__attribute__((unused)) va_list args);
+int _putchar(char);
+int selection(va_list args, char specifiers);
+int print_id(int n);
 
 #endif

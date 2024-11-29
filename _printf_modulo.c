@@ -1,15 +1,12 @@
-#include <stdio.h>
-#include <stdarg.h>
 #include "main.h"
 
 /**
- * _printf_modulo - print a %
- * @args: arguments
- * Return: 1
+ * print_purcent - print the purcent sign
+ * @args : list of arguments
+ * Return: our little purcent specifier
  */
-int _printf_modulo(va_list args)
+
+int print_purcent(__attribute__((unused)) va_list args)
 {
-	(void)args;
-	_putchar('%');
-	return (1);
+	return (_putchar('%'));
 }

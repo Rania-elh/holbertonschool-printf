@@ -1,27 +1,23 @@
 #include "main.h"
-#include <unistd.h>
-#include <stdarg.h>
 
 /**
- * _printf_string - Prototypes
+ * print_s - prints string to stdout
  * @args: arguments
- * Return: allchar
+ * Return: 0 on success
  */
 
-int _printf_string(va_list args)
+int print_s(va_list args)
 {
-	int i;
-	int allchar = 0;
+	int i = 0;
 	char *str = va_arg(args, char *);
 
-	if (!str)
+	if (str == NULL)
 		str = "(null)";
 
-	if (str[0] == '\0')
-		return (-1);
-
-	for (i = 0; str[i] != '\0'; i++)
-		allchar += _putchar(str[i]);
-
-	return (allchar);
+	while (str[i])
+	{
+		_putchar(str[i]);
+		i++;
+	}
+	return (i);
 }
