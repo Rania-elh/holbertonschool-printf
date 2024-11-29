@@ -2,8 +2,13 @@
 #include <stdarg.h>
 #include "main.h"
 
+<<<<<<< HEAD
 /*
  * _print_decimal - Print a decimal number.
+=======
+/**
+ * _print_decimal - print a decimal
+>>>>>>> refs/remotes/origin/main
  *@agrs: int
  *Return: The number of characters printed.
  */

@@ -3,12 +3,12 @@
 #include <stdarg.h>
 
 /**
- * print_string - Prototypes
+ * _printf_string - Prototypes
  * @args: arguments
  * Return: allchar
  */
 
-int printf_string(va_list args)
+int _printf_string(va_list args)
 {
 	int i;
 	int allchar = 0;
