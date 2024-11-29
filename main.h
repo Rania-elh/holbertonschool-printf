@@ -24,7 +24,7 @@ int _printf(const char *format, ...);
 int _printf_char(va_list args);
 int _printf_modulo(va_list args);
 int _printf_string(va_list args);
-int _printf_decimal_recursive(int num);
-int _printf_decimal(va_list args);
+int _print_decimal(va_list args);
+int _print_int(va_list args);
 
 #endif
