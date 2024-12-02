@@ -82,8 +82,8 @@ Header file containing function prototypes.
 ### main.c
 It is used to test the _printf function.
 ### _putchar.c
-The ![Copie de Exemple d'algorigramme](https://github.com/user-attachments/assets/531ac96f-9240-4c2c-866c-29059b95caa1)
-file is used to print a character to the standard output(stdout) using the "write" function.
+![Copie de Exemple d'algorigramme](https://github.com/user-attachments/assets/531ac96f-9240-4c2c-866c-29059b95caa1)
+the file is used to print a character to the standard output(stdout) using the "write" function.
 
 ## Man Page
 ```
