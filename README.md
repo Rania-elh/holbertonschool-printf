@@ -86,10 +86,12 @@ The file is used to print a character to the standard output(stdout) using the "
 
 ## Man Page
 ```
-Here is our [manual page](https://github.com/Rania-elh/holbertonschool-printf/blob/main/man_3_printf)
+Here is our [![Copie de Exemple d'algorigramme](https://github.com/user-attachments/assets/8fc2f389-49aa-42cb-a431-d4f74af6baf7)
+manual page](https://github.com/Rania-elh/holbertonschool-printf/blob/main/man_3_printf)
 ```
 ## Compilation
 All our code will be compiled on Ubuntu 20.04 LTS with :
+
 ```
 gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c
 ```
